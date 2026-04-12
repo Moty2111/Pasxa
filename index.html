@@ -46,6 +46,7 @@
       z-index: 10;
       letter-spacing: 1px;
     }
+    /* Мобильная адаптация */
     @media (max-width: 600px) {
       .hint {
         bottom: 12px;
@@ -85,7 +86,7 @@
         line3: 'мира и добра'
       };
 
-      // частицы (золотая пыль)
+      // частицы
       for (let i = 0; i < PARTICLE_COUNT; i++) {
         particles.push({
           x: Math.random() * canvas.width,
@@ -128,23 +129,20 @@
         return `#${((1 << 24) + (R << 16) + (G << 8) + B).toString(16).slice(1)}`;
       }
 
-      // ---------- КУЛИЧ С ЖИВОЙ ГЛАЗУРЬЮ В ОДНОМ СЛОЕ ----------
+      // ---------- КУЛИЧ С ГЛАЗУРЬЮ ----------
       function drawKulich(cx, cy, baseW, baseH) {
         const w = baseW, h = baseH;
         ctx.save();
         
-        // Тень под куличом
         ctx.shadowColor = '#2a1a0e';
         ctx.shadowBlur = 45;
         ctx.shadowOffsetY = 20;
         
-        // Нижняя корочка
         ctx.beginPath();
         ctx.ellipse(cx, cy + h*0.18, w*0.55, h*0.18, 0, 0, Math.PI*2);
         ctx.fillStyle = '#8b5e36';
         ctx.fill();
 
-        // Основной цилиндр (тесто)
         ctx.shadowOffsetY = 12;
         ctx.shadowBlur = 38;
         ctx.beginPath();
@@ -156,7 +154,6 @@
         ctx.fillStyle = doughGrad;
         ctx.fill();
 
-        // Текстура (поры, вкрапления)
         ctx.shadowBlur = 8;
         ctx.shadowOffsetY = 4;
         ctx.globalAlpha = 0.35;
@@ -179,7 +176,6 @@
         }
         ctx.globalAlpha = 1.0;
 
-        // Верхняя корочка
         ctx.shadowBlur = 30;
         ctx.shadowOffsetY = 10;
         ctx.beginPath();
@@ -190,34 +186,25 @@
         ctx.fillStyle = topGrad;
         ctx.fill();
 
-        // ---------- ЖИВАЯ ГЛАЗУРЬ (ЕДИНЫЙ СЛОЙ) ----------
+        // глазурь
         ctx.shadowColor = '#a08060';
         ctx.shadowBlur = 35;
         ctx.shadowOffsetY = 10;
         
-        // Рисуем единую сложную форму глазури с потёками
         ctx.beginPath();
-        // Начинаем с левого верхнего края шапки
         ctx.moveTo(cx - w*0.6, cy - h*0.65);
-        // Верхняя дуга (шапка)
         ctx.quadraticCurveTo(cx - w*0.3, cy - h*0.82, cx, cy - h*0.85);
         ctx.quadraticCurveTo(cx + w*0.3, cy - h*0.82, cx + w*0.6, cy - h*0.65);
-        // Правый бок с потёком
         ctx.quadraticCurveTo(cx + w*0.65, cy - h*0.45, cx + w*0.5, cy - h*0.2);
         ctx.quadraticCurveTo(cx + w*0.4, cy - h*0.35, cx + w*0.45, cy - h*0.5);
-        // Нижний контур правого потёка
         ctx.quadraticCurveTo(cx + w*0.35, cy - h*0.3, cx + w*0.3, cy - h*0.5);
-        // Переход к центру
         ctx.quadraticCurveTo(cx + w*0.15, cy - h*0.45, cx + w*0.1, cy - h*0.5);
-        // Центральный передний потёк
         ctx.quadraticCurveTo(cx, cy - h*0.25, cx - w*0.1, cy - h*0.5);
         ctx.quadraticCurveTo(cx - w*0.15, cy - h*0.45, cx - w*0.3, cy - h*0.5);
-        // Левый потёк
         ctx.quadraticCurveTo(cx - w*0.4, cy - h*0.35, cx - w*0.5, cy - h*0.2);
         ctx.quadraticCurveTo(cx - w*0.65, cy - h*0.45, cx - w*0.6, cy - h*0.65);
         ctx.closePath();
         
-        // Заливаем единым градиентом (светлый крем)
         const glazeGrad = ctx.createRadialGradient(cx-15, cy-h*0.72, 5, cx, cy-h*0.6, w*0.7);
         glazeGrad.addColorStop(0, '#fffef9');
         glazeGrad.addColorStop(0.3, '#fef8ed');
@@ -226,7 +213,6 @@
         ctx.fillStyle = glazeGrad;
         ctx.fill();
         
-        // Добавляем тонкие подтёки-капли (единая заливка, просто утолщения)
         ctx.shadowBlur = 18;
         ctx.fillStyle = '#fffef9';
         ctx.beginPath();
@@ -239,7 +225,6 @@
         ctx.ellipse(cx, cy - h*0.32, 12, 18, 0, 0, Math.PI*2);
         ctx.fill();
 
-        // Влажные блики (имитация мокрой глазури)
         ctx.shadowBlur = 25;
         ctx.shadowColor = '#ffffff';
         ctx.globalAlpha = 0.7;
@@ -255,7 +240,6 @@
         ctx.fill();
         ctx.globalAlpha = 1.0;
 
-        // Посыпка
         ctx.shadowBlur = 20;
         ctx.shadowColor = '#eec77a';
         const sprinkleColors = ['#f9d84a', '#e66b6b', '#5fb57a', '#b38bdd', '#f09b5a', '#6db1de', '#e6b0c2'];
@@ -277,7 +261,6 @@
           ctx.shadowBlur = 20;
         }
 
-        // Сияние
         ctx.shadowBlur = 80;
         ctx.shadowColor = '#fff5d6';
         ctx.globalAlpha = 0.25;
@@ -289,7 +272,7 @@
         ctx.restore();
       }
 
-      // ---------- ЯЙЦО (УЗОР ВНУТРИ КЛИПА) ----------
+      // ---------- ЯЙЦО ----------
       function drawEgg(cx, cy, w, h, baseColor, patternColor, patternType, rotationBase) {
         const rot = rotationBase + Math.sin(time * 1.8 + cx * 0.01) * 0.08;
         const bobY = Math.sin(time * 2.2 + cy * 0.02) * 5;
@@ -591,31 +574,32 @@
         ctx.restore();
       }
 
-      // ---------- УВЕЛИЧЕННАЯ НАДПИСЬ ----------
+      // ---------- АДАПТИВНАЯ НАДПИСЬ ----------
       function drawGreeting() {
         const w = canvas.width, h = canvas.height;
         ctx.save();
         
-        // Увеличенная плашка
-        const plateW = Math.min(600, w * 0.7);
-        const plateH = 150;
+        // Для мобильных делаем плашку уже и ниже
+        const isMobile = w < 600;
+        const plateW = isMobile ? Math.min(400, w * 0.85) : Math.min(600, w * 0.7);
+        const plateH = isMobile ? 130 : 150;
         const plateX = w/2 - plateW/2;
-        const plateY = h * 0.72;
+        const plateY = isMobile ? h * 0.75 : h * 0.72;
         
         const plateGrad = ctx.createLinearGradient(plateX, plateY, plateX + plateW, plateY + plateH);
         plateGrad.addColorStop(0, '#3a281ad9');
         plateGrad.addColorStop(0.5, '#4f3826d9');
         plateGrad.addColorStop(1, '#2e1f12d9');
         ctx.fillStyle = plateGrad;
-        ctx.shadowBlur = 30;
+        ctx.shadowBlur = isMobile ? 20 : 30;
         ctx.shadowColor = '#d4a76a';
-        ctx.shadowOffsetY = 6;
+        ctx.shadowOffsetY = isMobile ? 4 : 6;
         ctx.beginPath();
         ctx.rect(plateX, plateY, plateW, plateH);
         ctx.fill();
-        ctx.shadowBlur = 20;
+        ctx.shadowBlur = isMobile ? 14 : 20;
         ctx.strokeStyle = '#ebd3aa';
-        ctx.lineWidth = 4;
+        ctx.lineWidth = isMobile ? 3 : 4;
         ctx.stroke();
 
         const textGrad = ctx.createLinearGradient(plateX + 20, plateY + 20, plateX + plateW - 20, plateY + plateH - 20);
@@ -624,31 +608,34 @@
         textGrad.addColorStop(0.7, '#ffdf99');
         textGrad.addColorStop(1, '#eebb77');
         
-        ctx.shadowBlur = 30;
+        ctx.shadowBlur = isMobile ? 20 : 30;
         ctx.shadowColor = '#1f130a';
-        ctx.shadowOffsetY = 5;
+        ctx.shadowOffsetY = isMobile ? 3 : 5;
         ctx.textAlign = 'center';
         
-        const baseY = plateY + 45;
+        const baseY = plateY + (isMobile ? 38 : 45);
+        const lineSpacing = isMobile ? 30 : 38;
+        const nameSpacing = isMobile ? 28 : 34;
+        const lastSpacing = isMobile ? 28 : 30;
         
-        ctx.font = `bold ${Math.min(58, w/13)}px 'Georgia', 'Times New Roman', serif`;
+        ctx.font = `bold ${isMobile ? 38 : 58}px 'Georgia', 'Times New Roman', serif`;
         ctx.fillStyle = textGrad;
         ctx.fillText(greeting.line1, w/2, baseY);
         
-        ctx.font = `italic ${Math.min(42, w/19)}px 'Georgia', serif`;
+        ctx.font = `italic ${isMobile ? 28 : 42}px 'Georgia', serif`;
         ctx.fillStyle = '#f5dbb0';
-        ctx.fillText(greeting.line2, w/2, baseY + 38);
+        ctx.fillText(greeting.line2, w/2, baseY + lineSpacing);
         
-        ctx.font = `600 ${Math.min(50, w/15)}px 'Georgia', serif`;
+        ctx.font = `600 ${isMobile ? 34 : 50}px 'Georgia', serif`;
         const nameGrad = ctx.createLinearGradient(w/2 - 100, 0, w/2 + 100, 0);
         nameGrad.addColorStop(0, '#ffe09c');
         nameGrad.addColorStop(1, '#fff1cf');
         ctx.fillStyle = nameGrad;
-        ctx.fillText(greeting.name, w/2, baseY + 72);
+        ctx.fillText(greeting.name, w/2, baseY + lineSpacing + nameSpacing);
         
-        ctx.font = `italic ${Math.min(38, w/21)}px 'Georgia', serif`;
+        ctx.font = `italic ${isMobile ? 26 : 38}px 'Georgia', serif`;
         ctx.fillStyle = '#eedbba';
-        ctx.fillText(greeting.line3, w/2, baseY + 102);
+        ctx.fillText(greeting.line3, w/2, baseY + lineSpacing + nameSpacing + lastSpacing);
         
         ctx.restore();
       }
