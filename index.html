@@ -23,7 +23,7 @@
             overflow-x: hidden;
         }
 
-        /* Мерцающие блёстки */
+        /* Мерцающие блёстки (фоновые) */
         .sparkle {
             position: absolute;
             width: 100%;
@@ -37,26 +37,26 @@
         .sparkle span {
             position: absolute;
             display: block;
-            width: 6px;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.8);
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.7);
             border-radius: 50%;
-            box-shadow: 0 0 12px #fff9d7, 0 0 20px #ffe9b0;
-            animation: floatSparkle 6s infinite ease-in-out;
+            box-shadow: 0 0 8px #fff9d7;
+            animation: floatSparkle 8s infinite ease-in-out;
         }
 
-        .sparkle span:nth-child(1) { top: 10%; left: 15%; width: 8px; height: 8px; animation-duration: 7s; }
-        .sparkle span:nth-child(2) { top: 25%; left: 85%; width: 5px; height: 5px; animation-duration: 5s; animation-delay: 1s; }
-        .sparkle span:nth-child(3) { top: 70%; left: 8%; width: 10px; height: 10px; animation-duration: 9s; animation-delay: 0.5s; }
-        .sparkle span:nth-child(4) { top: 80%; left: 90%; width: 7px; height: 7px; animation-duration: 6s; animation-delay: 2s; }
-        .sparkle span:nth-child(5) { top: 45%; left: 50%; width: 6px; height: 6px; animation-duration: 8s; animation-delay: 1.8s; }
-        .sparkle span:nth-child(6) { top: 15%; left: 40%; width: 4px; height: 4px; animation-duration: 4.5s; }
-        .sparkle span:nth-child(7) { top: 60%; left: 30%; width: 9px; height: 9px; animation-duration: 7.5s; animation-delay: 0.7s; }
-        .sparkle span:nth-child(8) { top: 88%; left: 60%; width: 5px; height: 5px; animation-duration: 5.8s; }
+        .sparkle span:nth-child(1) { top: 10%; left: 15%; width: 7px; height: 7px; animation-duration: 9s; }
+        .sparkle span:nth-child(2) { top: 25%; left: 85%; width: 4px; height: 4px; animation-duration: 6s; animation-delay: 1s; }
+        .sparkle span:nth-child(3) { top: 70%; left: 8%; width: 9px; height: 9px; animation-duration: 11s; animation-delay: 0.5s; }
+        .sparkle span:nth-child(4) { top: 80%; left: 90%; width: 6px; height: 6px; animation-duration: 7s; animation-delay: 2s; }
+        .sparkle span:nth-child(5) { top: 45%; left: 50%; width: 5px; height: 5px; animation-duration: 10s; animation-delay: 1.8s; }
+        .sparkle span:nth-child(6) { top: 15%; left: 40%; width: 3px; height: 3px; animation-duration: 5s; }
+        .sparkle span:nth-child(7) { top: 60%; left: 30%; width: 8px; height: 8px; animation-duration: 9s; animation-delay: 0.7s; }
+        .sparkle span:nth-child(8) { top: 88%; left: 60%; width: 4px; height: 4px; animation-duration: 6.5s; }
 
         @keyframes floatSparkle {
             0% { transform: translateY(0px) scale(1); opacity: 0.3; }
-            50% { transform: translateY(-30px) scale(1.5); opacity: 1; box-shadow: 0 0 20px #fff3b0, 0 0 35px #ffddaa; }
+            50% { transform: translateY(-25px) scale(1.3); opacity: 0.9; }
             100% { transform: translateY(0px) scale(1); opacity: 0.3; }
         }
 
@@ -446,7 +446,7 @@
             opacity: 0.8;
         }
 
-        /* ----- КРОЛИК (усы исправлены, стали меньше и аккуратнее) ----- */
+        /* ----- КРОЛИК (усы исправлены) ----- */
         .rabbit {
             position: relative;
             display: flex;
@@ -537,19 +537,19 @@
             left: 19px;
         }
 
-        /* ИСПРАВЛЕННЫЕ УСЫ: меньше, тоньше, симметричнее */
+        /* Усы аккуратные */
         .rabbit-whisker {
             position: absolute;
-            width: 12px;           /* было 16px */
-            height: 1.5px;         /* было 2px */
+            width: 12px;
+            height: 1.5px;
             background: #a58e78;
             border-radius: 2px;
-            top: 24px;             /* оставляем на прежнем уровне */
-            left: -2px;            /* чуть ближе к центру */
+            top: 24px;
+            left: -2px;
             box-shadow: 
-                0 3px 0 #a58e78,   /* уменьшено расстояние между усами */
+                0 3px 0 #a58e78,
                 0 -3px 0 #a58e78,
-                34px 0 0 #a58e78,  /* правые усы */
+                34px 0 0 #a58e78,
                 34px 3px 0 #a58e78,
                 34px -3px 0 #a58e78;
         }
@@ -670,7 +670,7 @@
 <div class="card">
     <div class="card-inner">
         <div class="title glow-text">✦ ХВ ✦</div>
-        <div class="subtitle">Христос Воскресе!</div>
+        <div class="subtitle">Христос Воскрес!</div>
 
         <div class="easter-scene">
             <div class="goods">
@@ -743,9 +743,10 @@
         let width = window.innerWidth;
         let height = window.innerHeight;
         
+        // УМЕНЬШЕНО КОЛИЧЕСТВО ЧАСТИЦ И РАЗМЕР ДЛЯ ПЛАВНОСТИ НА ТЕЛЕФОНЕ
         let particles = [];
-        const particleCount = 45;
-        const colors = ['#f9d6e0', '#fce1a4', '#c5e0c5', '#b4d0e7', '#f3c3b2', '#e7c6cf', '#fbe38e'];
+        const particleCount = 25;        // было 45
+        const colors = ['#f9d6e0', '#fce1a4', '#c5e0c5', '#b4d0e7', '#f3c3b2', '#e7c6cf'];
 
         function resizeCanvas() {
             width = window.innerWidth;
@@ -762,12 +763,12 @@
                 particles.push({
                     x: Math.random() * width,
                     y: Math.random() * -height * 0.3,
-                    size: Math.random() * 8 + 4,
-                    speedY: Math.random() * 1.8 + 1.2,
-                    speedX: Math.random() * 0.5 - 0.25,
+                    size: Math.random() * 5 + 3,    // максимальный размер ~8 → теперь ~6
+                    speedY: Math.random() * 1.5 + 1,
+                    speedX: Math.random() * 0.4 - 0.2,
                     color: colors[Math.floor(Math.random() * colors.length)],
                     rotation: Math.random() * 360,
-                    rotationSpeed: (Math.random() - 0.5) * 2,
+                    rotationSpeed: (Math.random() - 0.5) * 1.5,
                     shape: Math.random() > 0.5 ? 'circle' : 'rect'
                 });
             }
@@ -780,15 +781,15 @@
                 ctx.translate(p.x, p.y);
                 ctx.rotate(p.rotation * Math.PI / 180);
                 ctx.fillStyle = p.color;
-                ctx.shadowColor = '#fff5d0';
-                ctx.shadowBlur = 12;
+                // убрали shadowBlur для производительности
+                ctx.shadowColor = 'transparent';
                 
                 if (p.shape === 'circle') {
                     ctx.beginPath();
                     ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
                     ctx.fill();
                 } else {
-                    ctx.fillRect(-p.size/2, -p.size/3, p.size, p.size/1.5);
+                    ctx.fillRect(-p.size/2, -p.size/3, p.size, p.size/1.8);
                 }
                 ctx.restore();
                 
